@@ -8,6 +8,7 @@ import org.springframework.http.converter.json.MappingJackson2HttpMessageConvert
 import org.springframework.stereotype.Service;
 import org.springframework.web.client.RestTemplate;
 
+
 import Model.Music;
 import Model.Results;
 import lombok.RequiredArgsConstructor;
@@ -50,8 +51,15 @@ public class ItunesService {
 		return restTemplate.getForObject(url.concat(query), Results.class);
 	}
 	
-	public void saveMusic(Music music) {
+	public boolean saveMusic(Music music) {
+		System.out.println(music.getArtistName());
 		itunesRepository.save(music);
+		return true;
+	}
+	public boolean deleteMusic(Music music) {
+		System.out.println(music.getArtistName());
+		itunesRepository.delete(music);
+		return true;
 	}
 	
 	

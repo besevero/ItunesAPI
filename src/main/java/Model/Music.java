@@ -2,7 +2,6 @@ package Model;
 
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
-import javax.persistence.GenerationType;
 import javax.persistence.Id;
 
 import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
@@ -21,7 +20,7 @@ import lombok.NoArgsConstructor;
 @Entity(name="itunes")
 public class Music {
 	@Id
- 	@GeneratedValue(strategy = GenerationType.IDENTITY)
+ 	@GeneratedValue
     private int id;
     private String wrapperType;
     private String trackName;

@@ -1,9 +1,11 @@
 package repository;
 
 import org.springframework.data.repository.CrudRepository;
+import org.springframework.stereotype.Repository;
 
 import Model.Music;
 
-public interface ItunesRepository extends CrudRepository<Music, Integer>{
+@Repository
+public interface ItunesRepository extends CrudRepository<Music, Integer>{	
 
 }

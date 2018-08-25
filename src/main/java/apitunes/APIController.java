@@ -3,27 +3,21 @@ package apitunes;
 import javax.validation.Valid;
 
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.web.bind.annotation.CrossOrigin;
+import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
-import org.springframework.web.bind.annotation.RequestMethod;
+import org.springframework.web.bind.annotation.RestController;
 
 import Model.Music;
 import Model.Results;
 import Service.ItunesService;
-import lombok.RequiredArgsConstructor;
-import lombok.extern.slf4j.Slf4j;
-import repository.ItunesRepository;
 
-@org.springframework.web.bind.annotation.RestController
-@CrossOrigin
-@Slf4j
-@RequiredArgsConstructor
-public class RestController {
+
+@RestController
+public class APIController {
 	
-	@Autowired
 	private ItunesService itunesService = new ItunesService();
 	
 	@GetMapping(value = "artist/{artistName}")
@@ -39,7 +33,11 @@ public class RestController {
 		return itunesService.searchBySong(trackName);
     }
 	@PostMapping(value = "save")
-    public void addResult(@RequestBody @Valid Music music) {
-		itunesService.saveMusic(music);
+    public boolean addResult(@RequestBody @Valid Music music) {
+		return itunesService.saveMusic(music);
+    }
+	@DeleteMapping(value = "delete")
+    public boolean deleteResult(@RequestBody @Valid Music music) {
+		return itunesService.saveMusic(music);
     }
 }
