@@ -52,8 +52,13 @@ public class ItunesService {
 	}
 	
 	public boolean saveMusic(Music music) {
-		System.out.println(music.getArtistName());
-		itunesRepository.save(music);
+		try{
+			itunesRepository.save(music);
+		}catch(Exception e){
+			System.out.print("Erro ao salvar");
+			return false;	
+		}
+		
 		return true;
 	}
 	public boolean deleteMusic(Music music) {
