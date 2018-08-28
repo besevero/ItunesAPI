@@ -12,7 +12,6 @@ import Model.Music;
 import Model.Results;
 import lombok.AllArgsConstructor;
 import lombok.NoArgsConstructor;
-import lombok.RequiredArgsConstructor;
 import repository.ItunesRepository;
 
 @AllArgsConstructor
@@ -20,7 +19,6 @@ import repository.ItunesRepository;
 @Service
 public class ItunesService {
 	
-	@Autowired
 	private ItunesRepository itunesRepository;
 	
 	private String url = "https://itunes.apple.com/search?term=";
@@ -57,7 +55,6 @@ public class ItunesService {
 		try{
 			itunesRepository.save(music);
 		}catch(Exception e){
-			System.out.print("Erro ao salvar" + e + music.getArtistName());
 			return false;	
 		}
 		
@@ -67,21 +64,14 @@ public class ItunesService {
 		try{
 			itunesRepository.delete(music);
 		}catch(Exception e){
-			System.out.print("Erro ao salvar" + e + music.getArtistName());
 			return false;	
 		}
 		return true;
 	}
 	
 	public Iterable<Music> getAll(){
-		Iterable<Music> musics = itunesRepository.findAll();
-		try{
-			itunesRepository.findAll();
-		}catch(Exception e){
-			System.out.print("Erro ao salvar");	
-		}
-		
-		return musics;
+			Iterable<Music> musics = itunesRepository.findAll();
+			return musics;
 	}
 	
 	
