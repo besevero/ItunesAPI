@@ -15,8 +15,6 @@ import lombok.NoArgsConstructor;
 @Builder
 @Data
 public class Results {
-
-	
 	private int resultCount;
 	private ArrayList<Music> results;
 }

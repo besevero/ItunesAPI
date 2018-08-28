@@ -8,20 +8,22 @@ import org.springframework.http.converter.json.MappingJackson2HttpMessageConvert
 import org.springframework.stereotype.Service;
 import org.springframework.web.client.RestTemplate;
 
-
 import Model.Music;
 import Model.Results;
+import lombok.AllArgsConstructor;
+import lombok.NoArgsConstructor;
 import lombok.RequiredArgsConstructor;
 import repository.ItunesRepository;
 
+@AllArgsConstructor
+@NoArgsConstructor
 @Service
-@RequiredArgsConstructor
 public class ItunesService {
 	
 	@Autowired
 	private ItunesRepository itunesRepository;
 	
-	private final String url = "https://itunes.apple.com/search?term=";
+	private String url = "https://itunes.apple.com/search?term=";
 	
 	public Results getArtistData(String artistName) {
 		String query = artistName.concat("&media=music") ;
@@ -55,16 +57,31 @@ public class ItunesService {
 		try{
 			itunesRepository.save(music);
 		}catch(Exception e){
-			System.out.print("Erro ao salvar");
+			System.out.print("Erro ao salvar" + e + music.getArtistName());
 			return false;	
 		}
 		
 		return true;
 	}
 	public boolean deleteMusic(Music music) {
-		System.out.println(music.getArtistName());
-		itunesRepository.delete(music);
+		try{
+			itunesRepository.delete(music);
+		}catch(Exception e){
+			System.out.print("Erro ao salvar" + e + music.getArtistName());
+			return false;	
+		}
 		return true;
+	}
+	
+	public Iterable<Music> getAll(){
+		Iterable<Music> musics = itunesRepository.findAll();
+		try{
+			itunesRepository.findAll();
+		}catch(Exception e){
+			System.out.print("Erro ao salvar");	
+		}
+		
+		return musics;
 	}
 	
 	

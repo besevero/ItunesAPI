@@ -17,7 +17,7 @@ import Service.ItunesService;
 
 @RestController
 public class APIController {
-	
+	 
 	private ItunesService itunesService = new ItunesService();
 	
 	@GetMapping(value = "artist/{artistName}")
@@ -32,11 +32,16 @@ public class APIController {
     public Results findSongByName(@PathVariable String trackName) {
 		return itunesService.searchBySong(trackName);
     }
-	@PostMapping(value = "save")
+	@GetMapping(value = "/getall}")
+    public Iterable<Music> getAllFromLocalStorage() {
+		Iterable<Music> musics = itunesService.getAll();
+		return musics;
+    }
+	@PostMapping(value = "/save")
     public boolean addResult(@RequestBody @Valid Music music) {
 		return itunesService.saveMusic(music);
     }
-	@DeleteMapping(value = "delete")
+	@DeleteMapping(value = "/delete")
     public boolean deleteResult(@RequestBody @Valid Music music) {
 		return itunesService.saveMusic(music);
     }
